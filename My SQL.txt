@@ -1,0 +1,14 @@
+SELECT C.login, COUNT(O.id) AS delivery_count
+FROM "Orders" AS O
+INNER JOIN "Couriers" AS C ON O."courierId"=C.id
+WHERE O."inDelivery"=true
+GROUP BY C.login;
+
+SELECT track,
+CASE 
+WHEN finished=true THEN 2
+WHEN cancelled=true THEN -1
+WHEN "inDelivery"=true THEN 1
+ELSE 0 
+END AS status
+FROM "Orders";
