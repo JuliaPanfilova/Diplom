@@ -7,12 +7,10 @@ def post_new_order(order_body):
         json=order_body)
 
 response_new_order = post_new_order(data.order_body)
-print(response_new_order.status_code)
-print(response_new_order.json())
+
 track_number = (response_new_order.json()["track"])
 
 def get_order(track_number):
     return requests.get(configuration.URL_SERVICE + configuration.GET_ORDER_TRACK + str(track_number),
                         params={"track":track_number})
 response_order_track = get_order(track_number);
-print(response_order_track.json())
